@@ -59,7 +59,7 @@ export HOSTNAME=$APP_ID.$INGRESS_HOST.nip.io
 
 
 cat preview.yaml \
-    | kyml tmpl -e REPO -e APP_ID -e IMAGE_TAG -e HOSTNAME \
+    | kyml tmpl -e GH_ORG -e REPO -e APP_ID -e IMAGE_TAG -e HOSTNAME \
     | tee helm/templates/$APP_ID.yaml
 
 ls -1 helm/templates
@@ -79,13 +79,17 @@ kubectl --namespace $APP_ID \
 
 curl http://$HOSTNAME
 
+##############
+# Second App #
+##############
+
 export PR_ID=1
 
-export REPO=devops-paradox
+export REPO=helm-app-1
 
 export APP_ID=pr-$REPO-$PR_ID
 
-export IMAGE_TAG=1.71
+export IMAGE_TAG=latest
 
 export HOSTNAME=$APP_ID.$INGRESS_HOST.nip.io
 
@@ -161,8 +165,4 @@ kubectl delete namespace $APP_ID
 ###########
 
 # Destroy the cluster
-# If it was created through https://gist.github.com/84324e2d6eb1e62e3569846a741cedea, the instructions are at the bottom
-
-open https://github.com/$GH_ORG/argocd-previews/settings
-
-# Click the *Delete this repository* button and follow the instructions
+# If it was created with minikube-argocd.sh at the end of the file are instructions
