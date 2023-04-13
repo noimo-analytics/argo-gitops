@@ -94,7 +94,7 @@ export IMAGE_TAG=latest
 export HOSTNAME=$APP_ID.$INGRESS_HOST.nip.io
 
 cat preview.yaml \
-    | kyml tmpl -e REPO -e APP_ID -e IMAGE_TAG -e HOSTNAME \
+    | kyml tmpl -e GH_ORG -e REPO -e APP_ID -e IMAGE_TAG -e HOSTNAME \
     | tee helm/templates/$APP_ID.yaml
 
 ls -1 helm/templates
