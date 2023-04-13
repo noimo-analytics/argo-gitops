@@ -17,7 +17,7 @@ spec:
         image:
           tag: "latest"
         ingress:
-          host: "pr-helm-app-1-1..nip.io"
+          host: "pr-helm-app-1-1.192.168.49.2.nip.io"
       version: v3
     path: helm
     repoURL: https://github.com/noimo-analytics/helm-app-1.git
