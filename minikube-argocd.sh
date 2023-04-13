@@ -28,6 +28,8 @@ helm upgrade --install argocd argo/argo-cd \
     --set server.ingress.hosts="{argocd.$INGRESS_HOST.nip.io}" \
     --values argo/argocd-values.yaml --wait
 
+kubectl port-forward service/argocd-server -n argocd 8085:443
+
 export PASS=$(kubectl --namespace argocd \
     get secret argocd-initial-admin-secret \
     --output jsonpath="{.data.password}" | base64 -d)
